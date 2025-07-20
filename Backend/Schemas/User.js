@@ -11,6 +11,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+   isLocked: { type: Boolean, default: false },
+  lockUntil: { type: Date, default: null },
+  failedAttempts: { type: Number, default: 0 },
+  //belowformannual
+  lockReason: { type: String, default: null },
+lockedBy: { type: String, default: null },
+lockedAt: { type: Date, default: null },
+
 }, { timestamps: true });
 
 userSchema.pre('save', async function (next) {
@@ -24,5 +32,19 @@ userSchema.pre('save', async function (next) {
     next(err);
   }
 });
+
+userSchema.methods.isAccountLocked = function () {
+  if (!this.isLocked) return false;
+
+  if (this.lockUntil && this.lockUntil > new Date()) {
+    return true; // still locked
+  }
+
+  // Auto-unlock if time expired
+  this.isLocked = false;
+  this.failedAttempts = 0;
+  this.lockUntil = null;
+  return false;
+};
 
 export default model('User', userSchema);

@@ -3,6 +3,7 @@ const route = express.Router();
 import User from '../Schemas/User.js'
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
+import logLoginAttempt from './loginAttemptlog.js';
 // signup 
 route.post('/signup', async (req, res) => {
   const { username, password } = req.body;
@@ -34,10 +35,12 @@ route.post('/signin', async (req, res) => {
   try {
     const user = await User.findOne({ username });
     if (!user) {
+      await logLoginAttempt(req, 'fail', 'user not found'); // req, status, reason.
       return res.status(400).json({ message: 'Invalid username or password' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
+      await logLoginAttempt(req, 'fail', 'wrong password');
       return res.status(400).json({ message: 'Invalid username or password' });
     }
     const token = jwt.sign(
@@ -45,9 +48,10 @@ route.post('/signin', async (req, res) => {
       JWT_SECRET,
       { expiresIn: '1h' }
     );
-
+    await logLoginAttempt(req, 'success');
     res.json({ message: 'Signed in successfully', token });
   } catch (err) {
+    await logLoginAttempt(req,'error','server issue')
     console.error('Signin error:', err);
     res.status(500).json({ message: 'Server error' });
   }

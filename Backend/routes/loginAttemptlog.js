@@ -12,7 +12,7 @@ export default async function logLoginAttempt(req, status = 'success', reason = 
     const { country, city, regionName, lat, lon } = geoRes.data;
     geo = { country, city, region: regionName, lat, lon };
   } catch (err) {
-    console.error('GeoIP failed', err.message);
+    console.err('GeoIP failed', err.message);
   }
 
   const log = new LoginLog({

@@ -1,8 +1,8 @@
-import SuspiciousRequest from '../Schemas/SuspiciousRequest'; // Schema to store logs
+import SuspiciousRequest from '../Schemas/SuspiciousRequest.js'; // Schema to store logs
 
 const ipRequestMap = new Map();
 
-const MAX_REQUESTS = 20; // can me manipulate or declare by the develover kind of user 
+const MAX_REQUESTS = 20; // can me manipulate or declare by the developer kind of user 
 const WINDOW_MS = 60 * 1000;
 
 const ipRateMonitor = async (req, res, next) => {

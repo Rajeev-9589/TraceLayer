@@ -7,19 +7,29 @@ const activityLogger = async (req, res, next) => {
     const ip = getClientIP(req);
     const geoRes = await axios.get(`http://ip-api.com/json/${ip}`);
     const location = geoRes.data;
+    const oneMinuteAgo = new Date(Date.now() - 60 * 1000); // You can tweak this
 
-    const log = new Activity({
-      username: req.user?.username || 'Guest',
-      route: req.originalUrl,
-      ip: ip,
-      method: req.method,
-      location: {
-        country: location.country,
-        city: location.city,
-        region: location.regionName,
+    await Activity.findOneAndUpdate(
+      {
+        ip,
+        route: req.originalUrl,
+        method: req.method,
+        createdAt: { $gte: oneMinuteAgo },
       },
-    });
-    await log.save();
+      {
+        $inc: { count: 1 },
+        $set: { lastSeen: new Date() },
+        $setOnInsert: {
+          username: req.user?.username || 'Guest',
+          location: {
+            country: location.country,
+            city: location.city,
+            region: location.regionName,
+          },
+        }
+      },
+      { upsert: true, new: true }
+    );
   } catch (err) {
     console.error('Activity logging failed:', err.message);
   }

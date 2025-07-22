@@ -35,14 +35,15 @@ route.post('/signin', async (req, res) => {
   }
   try {
     const user = await User.findOne({ username });
+    
+    if (!user) {
+      await logLoginAttempt(req, 'fail', 'user not found'); // req, status, reason.
+      return res.status(400).json({ message: 'Invalid username or password' });
+    }
     if (user.isAccountLocked()) {
       return res.status(403).json({
         message: 'Account temporarily locked due to suspicious activity. Try again later.',
       });
-    }
-    if (!user) {
-      await logLoginAttempt(req, 'fail', 'user not found'); // req, status, reason.
-      return res.status(400).json({ message: 'Invalid username or password' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {

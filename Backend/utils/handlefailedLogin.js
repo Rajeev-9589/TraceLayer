@@ -13,7 +13,7 @@ export default async function handleFailedLogin(user) {
 }
 
 //manually locking 
-export default async function lockManually(user, reason = 'Manual block', admin = 'System') {
+export  async function lockManually(user, reason = 'Manual block', admin = 'System') {
   user.isLocked = true;
   user.lockUntil = null; // null means "indefinitely locked"
   user.lockReason = reason;

@@ -1,6 +1,6 @@
 import express from 'express';
-import Activity from '../../Schemas/ActivityLog.js';
-import SuspiciousRequest from '../../Schemas/SuspiciousRequest.js';
+import Activity from '../Schemas/ActivityLog.js';
+import SuspiciousRequest from '../Schemas/SuspiciousRequest.js';
 
 const router = express.Router();
 

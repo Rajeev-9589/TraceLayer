@@ -1,6 +1,7 @@
 import LoginLog from '../Schemas/LoginLog.js';
 import getClientIP from '../utils/getclientip.js';
 import axios from 'axios';
+import Dev from '../Schemas/DevUser.js'
 
 export default async function logLoginAttempt(req, status = 'success', reason = '') {
   const ip = getClientIP(req);
@@ -22,6 +23,7 @@ export default async function logLoginAttempt(req, status = 'success', reason = 
     status,
     reason,
     location: geo,
+    appId: dev.appId,
   });
 
   await log.save();

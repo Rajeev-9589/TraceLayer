@@ -3,6 +3,7 @@ import connectDB from './config/db.js'
 import signinsignup from './routes/signin&signuplogout.js'
 import activityLogger from './routes/Activitylogger.js';
 import ipratemonitor from './routes/iprateMonitor.js'
+import activity from './routes/Activityget.js'
 import cors from 'cors';
 import FakeData from './routes/Fakedata.js'
 const port  =5500;
@@ -19,6 +20,8 @@ connectDB();
 app.use('/',signinsignup)
 app.use(ipratemonitor)
 app.use(activityLogger)
+app.use('/',activity)
+
 app.get('/', (req, res) => {
   res.send('Welcome to the our API!');
 });

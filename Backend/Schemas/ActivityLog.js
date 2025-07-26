@@ -10,8 +10,11 @@ const activitySchema = new mongoose.Schema({
     city: String,
     region: String,
   },
-  count: { type: Number, default: 1 }, // ✅ New
-  lastSeen: { type: Date },            // ✅ Optional, for tracking recent activity
+  count: { type: Number, default: 1 }, // New
+  lastSeen: { type: Date }, // to get the recent activity
+ appId: {
+    type: String, // ✅ Correct type — matches Dev.appId
+  },
 }, { timestamps: true });
 
 export default mongoose.model('Activity', activitySchema);

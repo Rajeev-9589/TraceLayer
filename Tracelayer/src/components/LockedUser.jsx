@@ -5,12 +5,12 @@ const LockedUsers = () => {
   const [users, setUsers] = useState([]);
 
   const fetchLockedUsers = async () => {
-    const res = await axios.get('http://localhost:5000/api/locked-users');
+    const res = await axios.get('http://localhost:5500/locked-users');
     setUsers(res.data);
   };
 
   const unlockUser = async (userId) => {
-    await axios.post('http://localhost:5000/api/unlock-user', { userId });
+    await axios.post('http://localhost:5500/unlock-user', { userId });
     fetchLockedUsers();
   };
 

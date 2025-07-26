@@ -14,7 +14,7 @@ const userSchema = new Schema({
    isLocked: { type: Boolean, default: false },
   lockUntil: { type: Date, default: null },
   failedAttempts: { type: Number, default: 0 },
-  //belowformannual
+  //below fields for mannual locking 
   lockReason: { type: String, default: null },
 lockedBy: { type: String, default: null },
 lockedAt: { type: Date, default: null },

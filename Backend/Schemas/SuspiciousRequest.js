@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const suspiciousRequestSchema = new mongoose.Schema({
   ip: String,
   path: String,
@@ -8,6 +9,9 @@ const suspiciousRequestSchema = new mongoose.Schema({
   count: Number,
   timestamp: { type: Date, default: Date.now },
   reason: String,
+ appId: {
+    type: String, // matches Dev.appId
+  },
 });
 
 export default mongoose.model('SuspiciousRequest', suspiciousRequestSchema);

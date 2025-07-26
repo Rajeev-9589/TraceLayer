@@ -13,6 +13,9 @@ const loginLogSchema = new mongoose.Schema({
     lat: Number,
     lon: Number,
   },
+   appId: {
+    type: String, // matches Dev.appId
+  },
 }, { timestamps: true });
 
 export default mongoose.model('LoginLog', loginLogSchema);

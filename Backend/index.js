@@ -9,8 +9,8 @@ const port  =5500;
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5173', // or use "*" for all origins (not recommended for prod)
-  credentials: true // if you are using cookies/session
+  origin: 'http://localhost:5173',
+  credentials: true 
 }));
 app.use(express.json()); //for parsing json bodies
 app.use(express.urlencoded({ extended: true }));

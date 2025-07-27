@@ -23,7 +23,7 @@ export default async function logLoginAttempt(req, status = 'success', reason = 
     status,
     reason,
     location: geo,
-    appId: dev.appId,
+    appId: Dev.appId,
   });
 
   await log.save();

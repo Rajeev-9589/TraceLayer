@@ -1,15 +1,25 @@
-// App.jsx
 import React from 'react';
-import LoginForm from './components/LoginForm';
-import AdminDashboard from './components/AdminDashboard';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Register from './components/Register';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Logs from './components/Logs';
+import Signin from './components/testcomponents/Signin';
+import SignupForm from './components/testcomponents/signup';
 
 function App() {
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">🔐 TraceLayer Dashboard</h1>
-      <LoginForm />
-      <AdminDashboard />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/test-endpoint/signup" element={<SignupForm />} />
+        <Route path="/test-endpoint/signin" element={<Signin />} />
+
+        <Route path="/logs" element={<Logs />} />
+      </Routes>
+    </Router>
   );
 }
 

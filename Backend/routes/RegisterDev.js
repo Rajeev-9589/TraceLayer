@@ -21,3 +21,4 @@ route.post('/register-Dev', async (req, res) => {
     appId: newDev.appId,
   });
 });
+export default route;

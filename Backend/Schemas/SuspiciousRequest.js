@@ -12,6 +12,10 @@ const suspiciousRequestSchema = new mongoose.Schema({
  appId: {
     type: String, // matches Dev.appId
   },
+  count: { type: Number, default: 1 },
+firstDetected: Date,
+lastDetected: Date,
+
 });
 
 export default mongoose.model('SuspiciousRequest', suspiciousRequestSchema);

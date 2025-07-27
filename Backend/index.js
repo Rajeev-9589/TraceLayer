@@ -1,32 +1,13 @@
-import express from 'express';
-import connectDB from './config/db.js'
-import signinsignup from './routes/signin&signuplogout.js'
-import activityLogger from './routes/Activitylogger.js';
-import ipratemonitor from './routes/iprateMonitor.js'
-import activity from './routes/Activityget.js'
-import cors from 'cors';
-import FakeData from './routes/Fakedata.js'
-const port  =5500;
+export { default as DevUser } from './Schemas/DevUser.js';
+export { default as SuspiciousRequest } from './Schemas/SuspiciousRequest.js';
+export { default as ActivityLog } from './Schemas/ActivityLog.js';
+export {default as getAllActivity} from'./routes/Activityget.js'
+export {default as iprateMonitormodel} from'./routes/iprateMonitor.js'
+export {default as logLoginAttemptmonitor} from'./Schemas/LoginLog.js'
+export {default as RegisterasDev} from'./routes/RegisterDev.js'
+export {default as DevLogin} from './routes/DevLogin.js'
+export {default as fakeapi} from './routes/Fakedata.js'
+export {default as tracelayerlogin} from './routes/signin&signuplogout.js'
 
-const app = express();
-app.use(cors({
-  origin: 'http://localhost:5173', // or use "*" for all origins (not recommended for prod)
-  credentials: true // if you are using cookies/session
-}));
-app.use(express.json()); //for parsing json bodies
-app.use(express.urlencoded({ extended: true }));
 
-connectDB();
-app.use('/',signinsignup)
-app.use(ipratemonitor)
-app.use(activityLogger)
-app.use('/',activity)
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the our API!');
-});
-app.use(FakeData)
-
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});

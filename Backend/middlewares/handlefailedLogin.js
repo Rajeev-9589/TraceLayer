@@ -7,6 +7,7 @@ export default async function handleFailedLogin(user) {
   if (user.failedAttempts >= MAX_FAILED_ATTEMPTS) {
     user.isLocked = true;
     user.lockUntil = new Date(Date.now() + LOCK_DURATION_MINUTES * 60 * 1000); //saved a 15+ date to unlock 
+    user.lockReason = 'Multiple failed attempts';
   }
 
   await user.save(); //update at schema

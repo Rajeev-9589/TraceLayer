@@ -1,9 +1,21 @@
 import express from 'express';
-import Activity from '../Schemas/ActivityLog.js';
-import SuspiciousRequest from '../Schemas/SuspiciousRequest.js';
+import Activity from '../../Schemas/ActivityLog.js';
+import SuspiciousRequest from '../../Schemas/SuspiciousRequest.js';
+import DevUser from '../../Schemas/DevUser.js';
 
 const router = express.Router();
+// route for the dev get the app detail by the app id 
+router.get('/app/:appId', async (req, res) => {
+  const { appId } = req.params;
+  try {
+const dev = await DevUser.findOne({ appId: req.params.appId });
+    if (!dev) return res.status(404).json({ message: "App not found" });
 
+    res.json({ appName: dev.appname, username:dev.username }); 
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching app name", error: err });
+  }
+});
 // Route 1: Get activity logs by appId
 router.get('/activities/:appId', async (req, res) => {
   const { appId } = req.params;

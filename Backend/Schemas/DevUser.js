@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
+import { type } from 'os';
 
 const DevUserSchema = new Schema({
   email: { type: String, unique: true },
@@ -17,6 +18,10 @@ const DevUserSchema = new Schema({
     unique: true,
     default: () => crypto.randomBytes(12).toString('hex'),
   },
+  rateLimit:{
+    type:Number,
+    default:20
+  }
 });
 
 // Hash password before saving

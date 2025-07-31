@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import express from 'express';
 import bcrypt from 'bcrypt'; 
-import DevUser from '../Schemas/DevUser.js'; 
+import DevUser from '../../Schemas/DevUser.js'; 
 
 const route = express.Router();
 route.post('/login-Dev', async (req, res) => {

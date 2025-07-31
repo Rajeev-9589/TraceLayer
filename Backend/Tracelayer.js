@@ -6,9 +6,9 @@ import {
   RegisterasDev,
   getAllActivity,
   iprateMonitormodel,
-  DevUser,
   DevLogin,fakeapi,
   tracelayerlogin,
+  limitsetter,
 } from './index.js';
 
 const app = express();
@@ -29,10 +29,9 @@ app.use('/api/', RegisterasDev);
 app.use('/api/', getAllActivity);
 app.use('/api/protected', iprateMonitormodel);
 app.use('/api/', DevLogin);
-app.use('/api/', fakeapi);
+app.use('/api/protected', fakeapi);
 app.use('/api',tracelayerlogin)
-
-
+app.use('/tracelayer',limitsetter)
 
 // check
 app.get('/', (req, res) => {

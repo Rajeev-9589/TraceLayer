@@ -1,6 +1,6 @@
 import axios from 'axios';
-import Activity from '../Schemas/ActivityLog.js';
-import getClientIP from '../utils/getclientip.js';
+import Activity from '../../Schemas/ActivityLog.js';
+import getClientIP from '../../utils/getclientip.js';
 
 const activityLogger = async (req, res, next) => {
   try {

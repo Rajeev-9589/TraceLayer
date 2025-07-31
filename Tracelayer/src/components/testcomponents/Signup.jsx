@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
 import api from '../../services/api';
 
 function SignupForm() {
   const [formData, setFormData] = useState({
+    email: '',
     username: '',
-    // email: '',
     password: ''
   });
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ 
@@ -20,42 +23,64 @@ function SignupForm() {
     e.preventDefault();
     try {
       const response = await api.post('http://localhost:5500/api/signup', formData);
-      alert(response.data.message);
+      setMessage(response.data.message || 'Signup successful');
     } catch (error) {
       console.error(error);
-      alert('Signup failed');
+      setMessage('Signup failed');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Signup</h2>
-      {/* <input 
-        type="text" 
-        name="username" 
-        placeholder="Username" 
-        value={formData.username} 
-        onChange={handleChange} 
-        required 
-      /><br/> */}
-      <input 
-        type="email" 
-        name="email" 
-        placeholder="Email" 
-        value={formData.email} 
-        onChange={handleChange} 
-        required 
-      /><br/>
-      <input 
-        type="password" 
-        name="password" 
-        placeholder="Password" 
-        value={formData.password} 
-        onChange={handleChange} 
-        required 
-      /><br/>
-      <button type="submit">Sign Up</button>
-    </form>
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-md mx-auto mt-20 p-6 bg-white border rounded-xl shadow-lg"
+    >
+      <h2 className="text-2xl font-semibold mb-6 text-center">Sign Up</h2>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <Input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
+          required
+        />
+        <Button type="submit" className="w-full">
+          Sign Up
+        </Button>
+      </form>
+
+      {message && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className={`mt-4 text-center ${
+            message.includes('successful') ? 'text-green-600' : 'text-red-600'
+          }`}
+        >
+          {message}
+        </motion.p>
+      )}
+    </motion.div>
   );
 }
 

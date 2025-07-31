@@ -2,7 +2,7 @@ import SuspiciousRequest from '../Schemas/SuspiciousRequest.js'; // Schema to st
 import Dev from '../Schemas/DevUser.js'
 const ipRequestMap = new Map();
 // const blockedIPs = new Map();
-const MAX_REQUESTS = 20; // can me manipulate or declare by the developer kind of user 
+const MAX_REQUESTS = Dev.rateLimit || 20;// can me manipulate or declare by the developer kind of user 
 const WINDOW_MS = 60 * 1000;
 // const BLOCK_DURATION_MS = 5 * 60 * 1000; // 5 minutes
 

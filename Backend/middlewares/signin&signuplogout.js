@@ -4,10 +4,10 @@ import User from '../Schemas/User.js'
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt'
 import logLoginAttempt from './loginAttemptlog.js';
-import handleFailedLogin from '../utils/handlefailedLogin.js';
+import handleFailedLogin from './handlefailedLogin.js';
 // signup 
 route.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+  const { email,username, password } = req.body;
   if (!password || !username) {
     res.json("Fill Credentials");
   }

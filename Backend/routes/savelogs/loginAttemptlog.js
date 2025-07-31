@@ -1,7 +1,7 @@
-import LoginLog from '../Schemas/LoginLog.js';
-import getClientIP from '../utils/getclientip.js';
+import LoginLog from '../../Schemas/LoginLog.js';
+import getClientIP from '../../utils/getclientip.js';
 import axios from 'axios';
-import Dev from '../Schemas/DevUser.js'
+import Dev from '../../Schemas/DevUser.js'
 
 export default async function logLoginAttempt(req, status = 'success', reason = '') {
   const ip = getClientIP(req);
@@ -13,7 +13,7 @@ export default async function logLoginAttempt(req, status = 'success', reason = 
     const { country, city, regionName, lat, lon } = geoRes.data;
     geo = { country, city, region: regionName, lat, lon };
   } catch (err) {
-    console.err('GeoIP failed', err.message);
+    console.error('GeoIP failed', err.message);
   }
 
   const log = new LoginLog({

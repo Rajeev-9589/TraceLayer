@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import api from '../../services/api';
+import api from '../services/api';
 
 export default function Signin() {
   const [form, setForm] = useState({ email: '', password: '' });

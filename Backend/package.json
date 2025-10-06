@@ -5,8 +5,8 @@
   "main": "tracelayer.js",
   "type": "module",
   "scripts": {
-    "start": "node tracelayer.js",
-    "dev": "nodemon tracelayer.js"
+    "start": "node Tracelayer.js",
+    "dev": "nodemon Tracelayer.js"
   },
   "keywords": [],
   "author": "",

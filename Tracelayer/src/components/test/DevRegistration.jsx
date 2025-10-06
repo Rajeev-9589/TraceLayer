@@ -76,7 +76,7 @@ export default function DevRegistration() {
 
     try {
       const response = await fetch(
-        `http://localhost:5500/api/register-Dev`,
+        `https://tracelayer.onrender.com/api/register-Dev`,
         {
           method: "POST",
           headers: {

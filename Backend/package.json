@@ -4,9 +4,10 @@
   "description": "",
   "main": "tracelayer.js",
   "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+"scripts": {
+  "start": "node tracelayer.js",
+  "dev": "nodemon tracelayer.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

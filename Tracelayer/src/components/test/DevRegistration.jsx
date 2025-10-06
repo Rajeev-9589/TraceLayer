@@ -76,7 +76,7 @@ export default function DevRegistration() {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_API_URL}/register-Dev`,
+        `http://localhost:5500/api/register-Dev`,
         {
           method: "POST",
           headers: {
@@ -140,8 +140,9 @@ export default function DevRegistration() {
   return (
     <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
       <Navigation isDocsPage={true} />
+
       <MotionBackground />
-      
+    
       <div className="relative z-10 min-h-screen flex items-center justify-center px-4 pt-20">
         <div className="w-full max-w-md">
           {/* Progress Indicator */}
@@ -258,7 +259,7 @@ export default function DevRegistration() {
                     <Lock className="h-8 w-8 text-[#00d9ff]" />
                   </div>
                   <h1 className="text-3xl font-bold font-mono text-[#00d9ff] mb-2">
-                    Secure Your Account
+                    Secure Your Application
                   </h1>
                   <p className="text-gray-400">
                     Create a strong password for <span className="text-[#00d9ff] font-mono">{formData.appName}</span>
@@ -323,7 +324,11 @@ export default function DevRegistration() {
                       <p className="text-red-400 text-sm mt-1 font-mono">{errors.confirmPassword}</p>
                     )}
                   </div>
-
+                                                                         {errors.general && (
+  <div className="bg-red-900/40 border border-red-500 text-red-300 p-3 rounded-lg mb-4 text-center font-mono">
+    {errors.general}
+  </div>
+)}  
                   <div className="flex space-x-4">
                     <Button
                       onClick={handleBack}
@@ -340,7 +345,7 @@ export default function DevRegistration() {
                     >
                       {isLoading ? "Creating Account..." : "Create Account"}
                     </Button>
-                  </div>
+                  </div> 
                 </div>
               </motion.div>
             )}
@@ -395,6 +400,7 @@ export default function DevRegistration() {
                   >
                     Back to Home
                   </Button>
+
                 </div>
               </motion.div>
             )}

@@ -10,7 +10,6 @@ import { Team } from "@/components/test/team"
 import { Footer } from "@/components/test/footer"
 import { MotionBackground } from "@/components/test/motion-background"
 import { Navigation } from "@/components/test/navigation"
-import { Button } from "./ui/button"
 
 
 export default function Home() {

@@ -1,44 +1,51 @@
-import express from 'express';
-import cors from 'cors';
-import connectDB from './config/db.js';
+import express from "express";
+import cors from "cors";
+import connectDB from "./config/db.js";
 
 import {
   RegisterasDev,
   getAllActivity,
   iprateMonitormodel,
-  DevLogin,fakeapi,
+  DevLogin,
+  fakeapi,
   tracelayerlogin,
   limitsetter,
-} from './index.js';
+} from "./index.js";
 
 const app = express();
-const PORT = 5500;
 
-// Connect to MongoDB
-connectDB();
+const PORT = process.env.PORT || 5500;
 
-// Middlewares
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173", // local dev
+      "https://tracelayer.netlify.app/", 
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-// Routes
-app.use('/api/', RegisterasDev);
-app.use('/api/', getAllActivity);
-app.use('/api/protected', iprateMonitormodel);
-app.use('/api/', DevLogin);
-app.use('/api/protected', fakeapi);
-app.use('/api',tracelayerlogin)
-app.use('/tracelayer',limitsetter)
+// ✅ Connect to MongoDB
+connectDB();
 
-// check
-app.get('/', (req, res) => {
-  res.send('Hello from App using TraceLayer ');
+// ✅ Routes
+app.use("/api/", RegisterasDev);
+app.use("/api/", getAllActivity);
+app.use("/api/protected", iprateMonitormodel);
+app.use("/api/", DevLogin);
+app.use("/api/protected", fakeapi);
+app.use("/api", tracelayerlogin);
+app.use("/tracelayer", limitsetter);
+
+// ✅ Default route
+app.get("/", (req, res) => {
+  res.send("Hello from TraceLayer backend 🚀");
 });
 
-// Start server
+// ✅ Start server
 app.listen(PORT, () => {
-  console.log(`App running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
